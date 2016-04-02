@@ -30,8 +30,71 @@ Difficulty : Medium
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
 int * find_sequences(int *arr, int len){
 	//Return final array which has 6indexes [AP1_S,AP1_E,AP2_S,AP2_E,GP1_S,GP2_E]
-	return NULL;
+
+	int iter, start=0, end, d, s, n = 0, *result = (int *)malloc(sizeof(int) * 6);
+	float f;
+	if (arr == NULL || len < 0)
+		return NULL;
+
+	d = arr[1] - arr[0];
+	for (iter = 1; iter < len - 1; iter++){
+		if ((arr[iter + 1] - arr[iter]) == d){
+			end = iter + 1;
+
+		}
+		else{
+			if (end - start > 1){
+				break;
+			}
+			d = arr[iter + 1] - arr[iter];
+			start = iter + 1;
+		}
+	}
+	result[0] = start;
+	result[1] = end;
+	start = iter++;
+	d = arr[iter + 1] - arr[iter];
+	for (iter = iter + 1; iter < len - 1; iter++){
+		if (arr[iter + 1] - arr[iter] == d){
+			end = iter + 1;
+		}
+		else{
+			if (end - start > 1) break;
+			d = arr[iter + 1] - arr[iter];
+			start = iter + 1;
+		}
+	}
+
+	result[2] = start;
+	result[3] = end;
+	iter = 0;
+	while (arr[iter] == 0) iter++;
+	f = arr[iter + 1] / arr[iter];
+
+	for (; iter < len - 1; iter++){
+		if (arr[iter + 1] == 0){
+			if (end - start > 1){
+				break;
+			}
+			f = 0;
+			n = 0;
+			start = iter + 1;
+		}
+		else if (arr[iter + 1] / arr[iter] == f){
+			end = iter + 1;
+		}
+		else{
+			if (end - start > 1){
+				break;
+			}
+			f = arr[iter] / arr[iter + 1];
+			start = iter + 1;
+		}
+
+	}
+	result[4] = start;
+	result[5] = end;
+	return result;
 }

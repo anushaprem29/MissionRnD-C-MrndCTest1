@@ -51,4 +51,10 @@ char * concat_4strings(char *s1, char *s2, char *s3, char *s4){
 			flag = true;
 		}
 	}
+	char * newString = (char *)malloc(sizeof(char) * 26);
+	for (int iter = 0,iter2=0; iter < 26; iter++){
+		if (arr[iter])
+			newString[iter2++] = (char)arr[iter] + 'a';
+	}
+	return newString;
 }

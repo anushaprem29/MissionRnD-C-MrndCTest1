@@ -72,8 +72,7 @@ int * find_sequences(int *arr, int len){
 	iter = 0;
 	while (arr[iter] == 0) iter++;
 	f = arr[iter + 1] / arr[iter];
-
-	for (; iter < len - 1; iter++){
+	for (iter++; iter < len - 1; iter++){
 		if (arr[iter + 1] == 0){
 			if (end - start > 1){
 				break;
@@ -92,7 +91,6 @@ int * find_sequences(int *arr, int len){
 			f = arr[iter] / arr[iter + 1];
 			start = iter + 1;
 		}
-
 	}
 	result[4] = start;
 	result[5] = end;

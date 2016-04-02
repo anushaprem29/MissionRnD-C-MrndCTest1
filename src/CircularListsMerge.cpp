@@ -74,5 +74,7 @@ int merge_circularlists(struct node **head1, struct node **head2){
 		head1 = head2;
 		merge(*head2, *head1);
 	}
-	return l1+l2;
+	second->next = *head1;
+
+	return l1+l2+1;
 }
